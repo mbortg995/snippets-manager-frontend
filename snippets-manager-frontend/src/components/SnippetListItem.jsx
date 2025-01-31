@@ -1,12 +1,16 @@
+import { useState } from "react";
 import { formatCategory } from "../utils/snippets";
 
 const SnippetListItem = ({ snippet, onClick }) => {
+  const [active, setActive] = useState(false);
   return (
-    <div className="snippet-item {isActive ? 'active' : ''}"
-      data-id="{snippet._id}"
+    <div className={`snippet-item ${active ? 'active' : ''}`}
       tabIndex="0"
       role="button"
-      onClick={() => onClick(snippet)}>
+      onClick={() => {
+        onClick(snippet);
+        setActive(true);
+      }}>
       <div className="snippet-item-title-wrapper">
         <img className="snippet-item-author-img" src={`/images/${snippet.author.toLowerCase()}.png`} alt={snippet.author} />
         <p className="snippet-item-title">{snippet.title}</p>

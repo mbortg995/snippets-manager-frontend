@@ -6,11 +6,13 @@ import './assets/css/variables.css'
 import './assets/css/styles.css'
 import './assets/css/layout.css'
 import snippets from './database.js'
-import SnippetListItem from './components/components.jsx'
+import SnippetListItem from './components/SnippetListItem.jsx'
+import SnippetView from './components/SnippetView.jsx'
+import CreateEmptyState from './components/SnippetEmptyState.jsx'
 
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [activeSnippet, setActiveSnippet] = useState(null);
 
   return (
     <>
@@ -36,14 +38,14 @@ function App() {
             </select>
           </div>
           <div className="snippets-list" id="snippets-list">
-            {snippets.map((snippet) => <SnippetListItem snippet={snippet} key={snippet._id} />)}
+            {snippets.map((snippet) => <SnippetListItem snippet={snippet} key={snippet._id} onClick={setActiveSnippet} />)}
 
           </div>
         </aside>
 
         <main className="main-content">
           <div id="snippet-content">
-            {/*El snippet seleccionado o estado vacío se mostrará aquí */}
+            {!activeSnippet ? <CreateEmptyState /> : <SnippetView snippet={activeSnippet} />}
           </div>
         </main>
       </div>

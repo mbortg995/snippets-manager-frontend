@@ -63,7 +63,11 @@ function App() {
           </select>
         </div>
         <div className="snippets-list" id="snippets-list">
-          {snippets && snippets.map((snippet) => <SnippetListItem snippet={snippet} key={snippet._id} onClick={setActiveSnippet} />)}
+          {snippets && snippets.map((snippet) => <SnippetListItem
+            snippet={snippet}
+            key={snippet._id}
+            onClick={setActiveSnippet}
+            activeSnippet={activeSnippet} />)}
 
         </div>
       </aside>

@@ -5,10 +5,6 @@ const CopyButton = ({ text }) => {
   const [, copyToClipboard] = useCopyToClipboard();
   const [clipboard, setClipboard] = useState("Copiar");
 
-  useEffect(() => {
-    setClipboard("Copiar");
-  }, [text]);
-
   return (
     <button className="copy-button" onClick={() => {
       copyToClipboard(text)

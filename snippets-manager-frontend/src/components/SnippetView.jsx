@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { formatCategory } from "../utils/snippets";
 import Prism from 'prismjs';
 import '../assets/css/prism.css'
+import CopyButton from "./CopyButton";
 
 const SnippetView = ({ snippet }) => {
   useEffect(() => {
@@ -20,9 +21,7 @@ const SnippetView = ({ snippet }) => {
         <p className="snippet-description">{snippet.description}</p>
       </div>
       <div className="code-wrapper">
-        <button className="copy-button" data-snippet={encodeURIComponent(snippet.content)}>
-          <span className="copy-text">Copiar</span>
-        </button>
+        <CopyButton text={snippet.content} />
         <pre><code className={`language-${snippet.category === 'nodejs' ? 'javascript' : snippet.category}`}>{snippet.content}</code></pre>
       </div>
       <div className="snippet-author">

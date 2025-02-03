@@ -1,14 +1,23 @@
+import { useEffect, useState } from 'react';
 import { useCopyToClipboard } from "@uidotdev/usehooks";
 
 const CopyButton = ({ text }) => {
-  const [copiedText, copyToClipboard] = useCopyToClipboard();
-  const hasCopiedText = Boolean(copiedText);
+  const [, copyToClipboard] = useCopyToClipboard();
+  const [clipboard, setClipboard] = useState("Copiar");
+
+  useEffect(() => {
+    setClipboard("Copiar");
+  }, [text]);
+
   return (
     <button className="copy-button" onClick={() => {
       copyToClipboard(text)
-      console.log(text);
+      setClipboard("Copiado!");
+      setTimeout(() => {
+        setClipboard("Copiar");
+      }, 2000);
     }}>
-      {hasCopiedText ? "Copiado!" : "Copiar"}
+      {clipboard}
     </button>
   )
 }

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useCopyToClipboard } from "@uidotdev/usehooks";
 
 const CopyButton = ({ text }) => {

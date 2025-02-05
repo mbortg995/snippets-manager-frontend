@@ -32,7 +32,6 @@ function App() {
         },
       });
 
-
       if (!response.ok) {
         if (response.status === 401) {
           window.location.href = '/login.html';

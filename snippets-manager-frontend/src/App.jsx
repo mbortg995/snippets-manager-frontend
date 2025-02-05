@@ -22,7 +22,6 @@ function App() {
   const handleChange = (event) => {
     setLanguageFilter(event.target.value);
     console.log(event.target.value);
-
   };
 
   useEffect(() => {

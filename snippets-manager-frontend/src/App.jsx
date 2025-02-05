@@ -17,6 +17,13 @@ function App() {
 
   const [snippets, setSnippets] = useState(null);
 
+  const [languageFilter, setLanguageFilter] = useState("");
+
+  const handleChange = (event) => {
+    setLanguageFilter(event.target.value);
+    console.log(event.target.value);
+  };
+
   useEffect(() => {
     const getSnippets = async () => {
       const response = await fetch('https://snippets-manager-ft.onrender.com/api/snippets', {
@@ -35,7 +42,6 @@ function App() {
 
       const snippetsData = await response.json();
       setSnippets(snippetsData);
-
     }
     getSnippets();
   }, [])
@@ -52,7 +58,7 @@ function App() {
           </a>
         </div>
         <div className="filter-container">
-          <select id="language-filter" className="filter-select">
+          <select id="language-filter" className="filter-select" value={languageFilter} onChange={handleChange}>
             <option value="" selected>Todos los Lenguajes</option>
             <option value="nodejs">Node.js</option>
             <option value="javascript">JavaScript</option>
@@ -63,12 +69,13 @@ function App() {
           </select>
         </div>
         <div className="snippets-list" id="snippets-list">
-          {snippets && snippets.map((snippet) => <SnippetListItem
-            snippet={snippet}
-            key={snippet._id}
-            onClick={setActiveSnippet}
-            activeSnippet={activeSnippet} />)}
-
+          {snippets && snippets
+            .filter((snippet) => !languageFilter || snippet.category === languageFilter)
+            .map((snippet) => <SnippetListItem
+              snippet={snippet}
+              key={snippet._id}
+              onClick={setActiveSnippet}
+              activeSnippet={activeSnippet} />)}
         </div>
       </aside>
 

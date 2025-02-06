@@ -3,7 +3,6 @@ import '@/assets/css/reset.css'
 import '@/assets/css/variables.css'
 import '@/assets/css/styles.css'
 import '@/assets/css/auth.css'
-import '@/assets/css/layout.css'
 
 const LoginPage = () => {
   return (

@@ -6,11 +6,12 @@ import '@/assets/css/layout.css'
 import SnippetListItem from '@/components/SnippetListItem.jsx'
 import SnippetView from '@/components/SnippetView.jsx'
 import CreateEmptyState from '@/components/SnippetEmptyState.jsx'
-
-const AUTH_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1ib3J0Zzk5NUBnbWFpbC5jb20iLCJpYXQiOjE3MzgxNDc2NjB9.QlK4022dmyUaGO8R3EKKTS-KXMjZOqyQYkLM3IY3CZs";
+import { useNavigate } from 'react-router-dom'
 
 
 function SnippetsListPage() {
+  const navigate = useNavigate();
+
   const [activeSnippet, setActiveSnippet] = useState(null);
 
   const [snippets, setSnippets] = useState(null);
@@ -23,25 +24,30 @@ function SnippetsListPage() {
   };
 
   useEffect(() => {
+    const token = localStorage.getItem("token");
+
     const getSnippets = async () => {
       const response = await fetch('https://snippets-manager-ft.onrender.com/api/snippets', {
         headers: {
-          Authorization: `Bearer ${AUTH_TOKEN}`,
+          Authorization: `Bearer ${token}`,
         },
       });
 
       if (!response.ok) {
         if (response.status === 401) {
-          window.location.href = '/login.html';
+          navigate('/login');
           return;
         }
-        throw new Error('Error fetching snippets');
       }
 
       const snippetsData = await response.json();
       setSnippets(snippetsData);
     }
-    getSnippets();
+    if (!token) {
+      navigate('/login');
+    } else {
+      getSnippets();
+    }
   }, [])
 
   return (

@@ -26,31 +26,35 @@ const RegisterPage = () => {
 
   const handleSubmitForm = async (event) => {
     event.preventDefault();
+    try {
+      const response = await fetch('https://snippets-manager-ft.onrender.com/api/auth/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
 
-    const response = await fetch('https://snippets-manager-ft.onrender.com/api/auth/register', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    });
+      if (!response.ok) {
+        const error = await response.json();
+        setError(error.error);
+      }
 
-    if (!response.ok) {
-      const error = await response.json();
-      throw new Error(error.error || 'Error al crear la cuenta');
+      const { user, token } = await response.json();
+
+      localStorage.setItem('user', JSON.stringify({
+        id: user.id,
+        email: user.email,
+        username: user.username,
+      }));
+
+      localStorage.setItem('token', token);
+
+      navigate('/');
+    } catch {
+      setError("Servicio no disponible. Inténtelo de nuevo más adelante.");
     }
 
-    const { user, token } = await response.json();
-
-    localStorage.setItem('user', JSON.stringify({
-      id: user.id,
-      email: user.email,
-      username: user.username,
-    }));
-
-    localStorage.setItem('token', token);
-
-    navigate('/');
   }
 
 
@@ -75,7 +79,7 @@ const RegisterPage = () => {
           className="auth-form"
           onSubmit={handleSubmitForm}
         >
-          <div className="auth-alert" id="error-message"></div>
+          {error ? <div className="auth-alert" id="error-message">{error}</div> : null}
           <div className="auth-form-group">
             <input
               type="text"

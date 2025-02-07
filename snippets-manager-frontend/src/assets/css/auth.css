@@ -125,9 +125,4 @@
   border-radius: var(--radius-sm);
   margin-bottom: var(--space-4);
   font-size: var(--font-size-sm);
-  display: none;
-}
-
-.auth-alert.show {
-  display: block;
 }

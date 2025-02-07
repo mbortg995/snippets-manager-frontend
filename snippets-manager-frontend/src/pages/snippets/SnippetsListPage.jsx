@@ -45,7 +45,7 @@ function SnippetsListPage() {
   }, [])
 
   return (
-    <>
+    <div className='app-layout'>
       <aside className="sidebar">
         <div className="sidebar-header">
           <img src="/images/logo.png" alt="Logo" />
@@ -83,7 +83,7 @@ function SnippetsListPage() {
         </div>
       </main>
 
-    </>
+    </div>
   )
 }
 

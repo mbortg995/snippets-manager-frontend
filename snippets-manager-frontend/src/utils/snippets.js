@@ -1,3 +1,4 @@
+
 const categoryMapper = {
   nodejs: 'Node.js',
   javascript: 'JavaScript',

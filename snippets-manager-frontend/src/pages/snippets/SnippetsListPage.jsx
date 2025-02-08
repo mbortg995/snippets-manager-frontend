@@ -6,7 +6,7 @@ import '@/assets/css/layout.css'
 import SnippetListItem from '@/components/SnippetListItem.jsx'
 import SnippetView from '@/components/SnippetView.jsx'
 import CreateEmptyState from '@/components/SnippetEmptyState.jsx'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import LogoutButton from '@/components/LogoutButton'
 
 
@@ -56,11 +56,11 @@ function SnippetsListPage() {
       <aside className="sidebar">
         <div className="sidebar-header">
           <img src="/images/logo.png" alt="Logo" />
-          <a href="/create.html" className="create-button">
+          <Link to="/create" className="create-button">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
             </svg>
-          </a>
+          </Link>
           <LogoutButton />
         </div>
         <div className="filter-container">

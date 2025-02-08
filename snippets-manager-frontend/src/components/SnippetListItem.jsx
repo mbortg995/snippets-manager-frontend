@@ -1,6 +1,7 @@
-import { formatCategory } from "../utils/snippets";
+import useCategory from "@/hooks/useCategory";
 
 const SnippetListItem = ({ snippet, onClick, activeSnippet }) => {
+  const { formatCategory } = useCategory();
   const active = activeSnippet && activeSnippet._id === snippet._id;
   return (
     <div className={`snippet-item ${active ? 'active' : ''}`}

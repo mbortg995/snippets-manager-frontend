@@ -1,10 +1,13 @@
 import { useEffect } from "react";
-import { formatCategory } from "../utils/snippets";
 import Prism from 'prismjs';
 import '../assets/css/prism.css'
 import CopyButton from "./CopyButton";
+import useCategory from "@/hooks/useCategory";
 
 const SnippetView = ({ snippet }) => {
+
+  const { formatCategory } = useCategory();
+
   useEffect(() => {
     Prism.highlightAll();
   }, [snippet._id]);

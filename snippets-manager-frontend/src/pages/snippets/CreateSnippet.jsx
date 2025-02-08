@@ -1,3 +1,4 @@
+import useCategory from "@/hooks/useCategory";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -7,6 +8,8 @@ const CreateSnippet = () => {
   const token = localStorage.getItem("token");
 
   const navigate = useNavigate();
+
+  const { categoriesList } = useCategory();
 
   const [data, setData] = useState({
     title: "",
@@ -95,13 +98,12 @@ const CreateSnippet = () => {
               onChange={handleInputChange}
               required
             >
-              <option value="">Selecciona un lenguaje</option>
-              <option value="nodejs">Node.js</option>
-              <option value="javascript">JavaScript</option>
-              <option value="html">HTML</option>
-              <option value="css">CSS</option>
-              <option value="express">Express</option>
-              <option value="npm">NPM</option>
+              <option value="" selected>Todos los Lenguajes</option>
+              {categoriesList.map(({ key, value }) => {
+                return (
+                  <option key={key} value={key} selected>{value}</option>
+                )
+              })}
             </select>
           </div>
 

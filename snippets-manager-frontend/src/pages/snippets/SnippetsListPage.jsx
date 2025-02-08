@@ -8,6 +8,7 @@ import SnippetView from '@/components/SnippetView.jsx'
 import CreateEmptyState from '@/components/SnippetEmptyState.jsx'
 import { Link, useNavigate } from 'react-router-dom'
 import LogoutButton from '@/components/LogoutButton'
+import useCategory from '@/hooks/useCategory'
 
 
 function SnippetsListPage() {
@@ -18,6 +19,8 @@ function SnippetsListPage() {
   const [snippets, setSnippets] = useState(null);
 
   const [languageFilter, setLanguageFilter] = useState("");
+
+  const { categoriesList } = useCategory();
 
   const handleChange = (event) => {
     setLanguageFilter(event.target.value);
@@ -66,12 +69,11 @@ function SnippetsListPage() {
         <div className="filter-container">
           <select id="language-filter" className="filter-select" value={languageFilter} onChange={handleChange}>
             <option value="" selected>Todos los Lenguajes</option>
-            <option value="nodejs">Node.js</option>
-            <option value="javascript">JavaScript</option>
-            <option value="html">HTML</option>
-            <option value="css">CSS</option>
-            <option value="express">Express</option>
-            <option value="npm">NPM</option>
+            {categoriesList.map(({ key, value }) => {
+              return (
+                <option key={key} value={key} selected>{value}</option>
+              )
+            })}
           </select>
         </div>
         <div className="snippets-list" id="snippets-list">

@@ -7,6 +7,7 @@ import SnippetListItem from '@/components/SnippetListItem.jsx'
 import SnippetView from '@/components/SnippetView.jsx'
 import CreateEmptyState from '@/components/SnippetEmptyState.jsx'
 import { useNavigate } from 'react-router-dom'
+import LogoutButton from '@/components/LogoutButton'
 
 
 function SnippetsListPage() {
@@ -60,6 +61,7 @@ function SnippetsListPage() {
               <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
             </svg>
           </a>
+          <LogoutButton />
         </div>
         <div className="filter-container">
           <select id="language-filter" className="filter-select" value={languageFilter} onChange={handleChange}>

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 
 const CreateSnippet = () => {
@@ -54,7 +54,7 @@ const CreateSnippet = () => {
       <header className="create-header">
         <div className="header-content">
           <img src="/images/logo.png" alt="Logo" />
-          <a href="/" className="back-link">← Volver a la Lista</a>
+          <Link to="/" className="back-link">← Volver a la Lista</Link>
         </div>
       </header>
 
@@ -136,7 +136,7 @@ const CreateSnippet = () => {
           {error ? <div className="auth-alert" id="error-message">{error}</div> : null}
           <div className="form-actions">
             <button type="submit" className="submit-button">Crear Snippet</button>
-            <a href="/" className="cancel-button">Cancelar</a>
+            <Link to="/" className="cancel-button">Cancelar</Link>
           </div>
         </form>
       </main>

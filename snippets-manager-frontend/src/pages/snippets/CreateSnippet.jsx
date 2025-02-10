@@ -1,3 +1,4 @@
+import { useAuth } from "@/contexts/AuthContext";
 import useCategory from "@/hooks/useCategory";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
@@ -5,11 +6,11 @@ import { Link, useNavigate } from "react-router-dom";
 
 const CreateSnippet = () => {
 
-  const token = localStorage.getItem("token");
-
   const navigate = useNavigate();
 
   const { categoriesList } = useCategory();
+
+  const { token } = useAuth();
 
   const [data, setData] = useState({
     title: "",

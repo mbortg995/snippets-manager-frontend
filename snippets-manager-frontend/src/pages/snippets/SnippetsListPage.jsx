@@ -9,6 +9,7 @@ import CreateEmptyState from '@/components/SnippetEmptyState.jsx'
 import { Link, useNavigate } from 'react-router-dom'
 import LogoutButton from '@/components/LogoutButton'
 import useCategory from '@/hooks/useCategory'
+import { useAuth } from '@/contexts/AuthContext'
 
 
 function SnippetsListPage() {
@@ -27,8 +28,9 @@ function SnippetsListPage() {
     console.log(event.target.value);
   };
 
+  const { isAutenticated, token } = useAuth();
+
   useEffect(() => {
-    const token = localStorage.getItem("token");
 
     const getSnippets = async () => {
       const response = await fetch('https://snippets-manager-ft.onrender.com/api/snippets', {
@@ -47,7 +49,7 @@ function SnippetsListPage() {
       const snippetsData = await response.json();
       setSnippets(snippetsData);
     }
-    if (!token) {
+    if (!isAutenticated) {
       navigate('/login');
     } else {
       getSnippets();

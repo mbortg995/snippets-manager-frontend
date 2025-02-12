@@ -9,6 +9,27 @@ body {
   min-height: 100vh;
 }
 
+.language-selector {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+}
+
+.language-active {
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.language-button {
+  padding-left: 8px;
+  padding-right: 8px;
+  color: #f4f4f4;
+}
+
+.language-button:focus {
+  outline: none;
+}
+
 .sidebar {
   padding: var(--space-4);
   border-right: 1px dashed var(--gray-300);

@@ -33,8 +33,6 @@ const RegisterPage = () => {
     }
   }
 
-
-
   return (
     <div className="auth-layout">
       <div className="auth-image">

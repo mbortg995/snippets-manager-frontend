@@ -5,8 +5,11 @@ import '@/assets/css/variables.css'
 import '@/assets/css/styles.css'
 import '@/assets/css/auth.css'
 import { useAuth } from "@/contexts/AuthContext";
+import { useTranslation } from "react-i18next";
 
 const LoginPage = () => {
+  const { t, i18n } = useTranslation();
+
   const { login, error } = useAuth();
 
   const navigate = useNavigate();
@@ -41,7 +44,7 @@ const LoginPage = () => {
       <div className="auth-content">
         <div className="auth-header">
           <img src="/images/logo.png" alt="Logo" className="auth-logo" />
-          <h1 className="auth-title">Iniciar sesión</h1>
+          <h1 className="auth-title">{t("login_button")}</h1>
           <p className="auth-subtitle">
             No tienes una cuenta? <a href="/register.html">Registrate</a>
           </p>
@@ -75,7 +78,7 @@ const LoginPage = () => {
             />
           </div>
 
-          <button type="submit" className="auth-button">Iniciar sesión</button>
+          <button type="submit" className="auth-button">{t("login_button")}</button>
         </form>
       </div>
     </div>

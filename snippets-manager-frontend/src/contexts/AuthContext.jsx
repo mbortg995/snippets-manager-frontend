@@ -47,12 +47,47 @@ export const AuthProvider = ({ children }) => {
     }
   }
 
+  const register = async (data) => {
+    try {
+      const response = await fetch('https://snippets-manager-ft.onrender.com/api/auth/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (!response.ok) {
+        const error = await response.json();
+        setError(error.error);
+        return false;
+      }
+
+      const { user, token } = await response.json();
+
+      localStorage.setItem('user', JSON.stringify({
+        id: user.id,
+        email: user.email,
+        username: user.username,
+      }));
+
+      localStorage.setItem('token', token);
+      return true;
+
+    } catch {
+      setError("Servicio no disponible. Inténtelo de nuevo más adelante.");
+      return false;
+    }
+
+  }
+
   return (
     <AuthContext.Provider value={{
       token,
       isAutenticated,
       logout,
       login,
+      register,
       error
     }}>
       {children}

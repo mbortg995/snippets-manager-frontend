@@ -4,8 +4,10 @@ import '@/assets/css/reset.css'
 import '@/assets/css/variables.css'
 import '@/assets/css/styles.css'
 import '@/assets/css/auth.css'
+import { useAuth } from "@/contexts/AuthContext";
 
 const LoginPage = () => {
+  const { login, error } = useAuth();
 
   const navigate = useNavigate();
 
@@ -13,8 +15,6 @@ const LoginPage = () => {
     email: "",
     password: ""
   });
-
-  const [error, setError] = useState("");
 
   const handleInputChange = (event) => {
     setData({
@@ -25,33 +25,9 @@ const LoginPage = () => {
 
   const handleSubmitForm = async (event) => {
     event.preventDefault();
-    try {
-      const response = await fetch('https://snippets-manager-ft.onrender.com/api/auth/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      });
-
-      if (!response.ok) {
-        const error = await response.json();
-        setError(error.error);
-      }
-
-      const { user, token } = await response.json();
-
-      localStorage.setItem('user', JSON.stringify({
-        id: user.id,
-        email: user.email,
-        username: user.username,
-      }));
-
-      localStorage.setItem('token', token);
-
+    const result = await login(data);
+    if (result) {
       navigate('/');
-    } catch {
-      setError("Servicio no disponible. Inténtelo de nuevo más adelante.");
     }
   }
 
